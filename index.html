@@ -409,8 +409,9 @@ const ROUTINES = {
   ]},
 };
 const ORDER = ["A","B","C"];
-/* Semana: el día del viernes original pasa al martes; los demás se corren un día. */
-for(const k of ORDER){const d=ROUTINES[k].days; d.splice(1,0,d.pop());}
+/* Orden semanal: L piernas · M pecho · X hombro · J glúteo · V espalda */
+const WEEK_ORDER={A:[0,4,2,3,1],B:[0,1,4,3,2],C:[0,1,2,3,4]};
+for(const k of ORDER){const d=ROUTINES[k].days; ROUTINES[k].days=WEEK_ORDER[k].map(i=>d[i]);}
 /* Sábado opcional (más corto, cuerpo completo) */
 ROUTINES.A.days.push({t:"Opcional · Cuerpo completo",opt:true,ex:[
   E("sent_libre","Sentadilla libre con barra","Squat Rack / Smith Machine","Rack de sentadilla o Multipower",3,"10",120,25,"r"),
